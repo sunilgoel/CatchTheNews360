@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="aakash.thenoobydev.com.catch360.AskCountryActivity">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:alpha="0.7"
+        android:src="@drawable/newspaper"
+        android:layout_marginBottom="16dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:hint="Enter Country Code">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginHorizontal="1dp"
+            android:fontFamily="@font/comfortaa"
+            android:inputType="text"
+            android:maxLength="2"
+            android:textColor="#000"
+            android:textColorHint="#000000"
+            android:textSize="18dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginHorizontal="78dp"
+        android:layout_marginTop="2dp"
+        android:background="#4DB6AC"
+        android:fontFamily="@font/comfortaa"
+        android:text="Catch the News"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+</LinearLayout>
