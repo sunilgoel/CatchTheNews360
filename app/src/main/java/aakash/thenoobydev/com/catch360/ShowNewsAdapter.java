@@ -1,10 +1,9 @@
 package aakash.thenoobydev.com.catch360;
 
 import android.content.Context;
-import android.media.Image;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +21,14 @@ import java.util.ArrayList;
 
 public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_holder> {
     Context context;
-    ArrayList<String> titleL, descL, urlImgL;
+    ArrayList<String> titleL, descL, urlImgL, urlNewsL;
 
-    public ShowNewsAdapter(Context applicationContext, ArrayList<String> titleL, ArrayList<String> descL, ArrayList<String> urlImgL) {
+    public ShowNewsAdapter(Context applicationContext, ArrayList<String> titleL, ArrayList<String> descL, ArrayList<String> urlImgL, ArrayList<String> urlNewsL) {
         this.context = applicationContext;
         this.titleL = titleL;
         this.descL = descL;
         this.urlImgL = urlImgL;
+        this.urlNewsL = urlNewsL;
     }
 
     @Override
@@ -45,6 +45,26 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
             holder.descN.setText(descL.get(position) + "");
         }
         Picasso.get().load(urlImgL.get(position) + "").fit().into(holder.imgN);
+        holder.newsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(urlNewsL.get(position)));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+        holder.shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "This is the News");
+                intent.setType("text/plain");
+                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,8 +74,9 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
 
     public class view_holder extends RecyclerView.ViewHolder {
 
-        TextView titleN, descN;
+        TextView titleN, descN, shareBtn;
         ImageView imgN;
+        LinearLayout newsCard;
 
         public view_holder(final View itemView) {
             super(itemView);
@@ -63,7 +84,8 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
             titleN = (TextView) itemView.findViewById(R.id.titleN);
             descN = (TextView) itemView.findViewById(R.id.descN);
             imgN = (ImageView) itemView.findViewById(R.id.imageN);
-
+            shareBtn = (TextView) itemView.findViewById(R.id.shareBtn);
+            newsCard = (LinearLayout) itemView.findViewById(R.id.card_layout);
         }
     }
 }

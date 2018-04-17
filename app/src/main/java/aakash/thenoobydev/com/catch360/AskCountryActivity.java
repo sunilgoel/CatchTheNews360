@@ -3,10 +3,8 @@ package aakash.thenoobydev.com.catch360;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,17 +23,16 @@ public class AskCountryActivity extends AppCompatActivity {
     EditText countryEt;
     Button btn;
     String country;
-
-    private String TAG = AskCountryActivity.class.getSimpleName();
-    private ProgressDialog progressDialog;
     JSONObject jsonObj;
     JSONArray jsonArray;
     String jsonStr;
     int len;
-
     ArrayList<String> titleL = new ArrayList<>();
     ArrayList<String> descL = new ArrayList<>();
     ArrayList<String> urlImgL = new ArrayList<>();
+    ArrayList<String> urlNewsL = new ArrayList<>();
+    private String TAG = AskCountryActivity.class.getSimpleName();
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +57,7 @@ public class AskCountryActivity extends AppCompatActivity {
         bundle.putStringArrayList("title", titleL);
         bundle.putStringArrayList("desc", descL);
         bundle.putStringArrayList("urlImg", urlImgL);
+        bundle.putStringArrayList("urlNews", urlNewsL);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -101,6 +99,7 @@ public class AskCountryActivity extends AppCompatActivity {
                         titleL.add(newsObj.getString("title"));
                         descL.add(newsObj.getString("description"));
                         urlImgL.add(newsObj.getString("urlToImage"));
+                        urlNewsL.add(newsObj.getString("url"));
                     }
                     return null;
                 } catch (final JSONException e) {
