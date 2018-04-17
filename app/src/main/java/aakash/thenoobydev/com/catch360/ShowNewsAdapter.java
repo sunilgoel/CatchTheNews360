@@ -40,10 +40,12 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
     @Override
     public void onBindViewHolder(final ShowNewsAdapter.view_holder holder, final int position) {
         holder.titleN.setText(titleL.get(position));
-        if(descL.get(position).contentEquals("null")){
-        }else {
+        final String title = holder.titleN.getText().toString();
+        if (descL.get(position).contentEquals("null")) {
+        } else {
             holder.descN.setText(descL.get(position) + "");
         }
+        final String desc = holder.descN.getText().toString();
         Picasso.get().load(urlImgL.get(position) + "").fit().into(holder.imgN);
         holder.newsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +61,7 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, "This is the News");
+                intent.putExtra(Intent.EXTRA_TEXT, title + "\n\n" + desc);
                 intent.setType("text/plain");
                 intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

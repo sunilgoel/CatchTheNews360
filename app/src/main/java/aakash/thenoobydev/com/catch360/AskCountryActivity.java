@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -19,7 +21,8 @@ import java.util.ArrayList;
 
 public class AskCountryActivity extends AppCompatActivity {
 
-    private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c&country=";
+    private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    String newsInterest = "";
     EditText countryEt;
     Button btn;
     String country;
@@ -33,6 +36,8 @@ public class AskCountryActivity extends AppCompatActivity {
     ArrayList<String> urlNewsL = new ArrayList<>();
     private String TAG = AskCountryActivity.class.getSimpleName();
     private ProgressDialog progressDialog;
+
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,19 @@ public class AskCountryActivity extends AppCompatActivity {
             }
         });
 
+        radioGroup = (RadioGroup) findViewById(R.id.radioGrp);
+        radioGroup.clearCheck();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    newsInterest = rb.getText().toString();
+                }
+            }
+        });
+
     }
 
     public void sendBundle() {
@@ -59,6 +77,7 @@ public class AskCountryActivity extends AppCompatActivity {
         bundle.putStringArrayList("urlImg", urlImgL);
         bundle.putStringArrayList("urlNews", urlNewsL);
         intent.putExtras(bundle);
+        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
@@ -77,7 +96,10 @@ public class AskCountryActivity extends AppCompatActivity {
 
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            jsonStr = sh.makeServiceCall(url + country);
+            if (newsInterest != "")
+                jsonStr = sh.makeServiceCall(url + "&country=" + country + "&category=" + newsInterest);
+            else
+                jsonStr = sh.makeServiceCall(url + "&country=" + country);
 
 //            Log.e("URL", url + country);
             Log.e(TAG, "Response from url: " + jsonStr);
