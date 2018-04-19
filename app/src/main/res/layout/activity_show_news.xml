@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical"
     tools:context="aakash.thenoobydev.com.catch360.ShowNewsActivity">
 
     <TextView
+        android:id="@+id/titleApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CATCH 360"
-        android:padding="8dp"
-        android:gravity="left"
-        android:textStyle="bold"
+        android:layout_alignParentTop="true"
         android:fontFamily="@font/comfortaa"
+        android:gravity="left"
+        android:padding="8dp"
+        android:text="CATCH 360"
         android:textColor="#000"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rec_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleApp"
+        android:layout_marginBottom="48dp"></android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6248104477860221/9400175357"></com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

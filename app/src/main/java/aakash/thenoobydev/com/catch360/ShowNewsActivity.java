@@ -6,6 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
 public class ShowNewsActivity extends AppCompatActivity {
@@ -18,10 +24,31 @@ public class ShowNewsActivity extends AppCompatActivity {
     ArrayList<String> urlNewsL = new ArrayList<>();
     private RecyclerView.Adapter adapter;
 
+    private AdView adView;
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_news);
+        MobileAds.initialize(this, "ca-app-pub-6248104477860221~8495708671");
+        // banner ad
+        adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+        //interstitial ad
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-6248104477860221/4455557165");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         bundle = intent.getExtras();
@@ -37,4 +64,19 @@ public class ShowNewsActivity extends AppCompatActivity {
         adapter = new ShowNewsAdapter(getApplicationContext(), titleL, descL, urlImgL, urlNewsL);
         recyclerView.setAdapter(adapter);
     }
+
+    public void showInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //show ad on app exit
+        showInterstitial();
+    }
+
 }

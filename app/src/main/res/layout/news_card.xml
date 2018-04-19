@@ -29,16 +29,17 @@
                 <ImageView
                     android:id="@+id/imageN"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="200dp" />
 
                 <TextView
                     android:id="@+id/titleN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"
+                    android:lineSpacingExtra="4dp"
                     android:paddingHorizontal="16dp"
                     android:textColor="#000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"
+                    android:lineSpacingExtra="4dp"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:textColor="#333"
