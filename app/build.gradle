@@ -31,5 +31,6 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'org.apache.httpcomponents:httpcore:4.4.1'
     implementation 'com.squareup.picasso:picasso:2.+'
+    compile 'com.android.support:customtabs:26.1.0'
     implementation 'com.google.android.gms:play-services-ads:15.0.0'
 }

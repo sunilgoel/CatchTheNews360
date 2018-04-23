@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -21,11 +20,22 @@ import java.util.ArrayList;
 
 public class AskCountryActivity extends AppCompatActivity {
 
-    private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
+    private static String educationUrl = "https://newsapi.org/v2/top-headlines?q=education&apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
+    private static String movieUrl = "https://newsapi.org/v2/top-headlines?q=movie&apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
+    private static String rapeUrl = "https://newsapi.org/v2/top-headlines?q=rape&apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
+    private static String techcrunchUrl = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String finanicaltimesUrl = "https://newsapi.org/v2/top-headlines?sources=financial-times&apiKey=bcf281151bac484dbd2cd56df9f57d3c&languag=en";
+    private static String businessinsiderUrl = "https://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String entertainmentweeklyUrl = "https://newsapi.org/v2/everything?sources=entertainment-weekly&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String espncricinfoUrl = "https://newsapi.org/v2/top-headlines?sources=espn-cric-info&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String footballitaliaUrl = "https://newsapi.org/v2/top-headlines?sources=football-italia&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String espnUrl = "https://newsapi.org/v2/top-headlines?sources=espn&apiKey=bcf281151bac484dbd2cd56df9f57d3c";
+    private static String ignUrl = "https://newsapi.org/v2/top-headlines?sources=ign&apiKey=bcf281151bac484dbd2cd56df9f57d3c";  //gamingType
+
     String newsInterest = "";
-    EditText countryEt;
     Button btn;
-    String country;
+    String country = "";
     JSONObject jsonObj;
     JSONArray jsonArray;
     String jsonStr;
@@ -44,28 +54,29 @@ public class AskCountryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_country);
 
-        countryEt = (EditText) findViewById(R.id.country);
         btn = (Button) findViewById(R.id.btn);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGrp);
+        radioGroup.clearCheck();
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                country = countryEt.getText().toString();
+//                country = countryEt.getText().toString();
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton rb = (RadioButton) group.findViewById(checkedId);
+//                        if (null != rb && checkedId > -1) {
+                        newsInterest = rb.getText().toString();
+//                        }
+                    }
+                });
+                Log.e("newsInterest", newsInterest);
+                Log.e("country", country);
                 new GetNews().execute();
             }
         });
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGrp);
-        radioGroup.clearCheck();
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-                if (null != rb && checkedId > -1) {
-                    newsInterest = rb.getText().toString();
-                }
-            }
-        });
 
     }
 
@@ -96,10 +107,13 @@ public class AskCountryActivity extends AppCompatActivity {
 
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            if (newsInterest != "")
-                jsonStr = sh.makeServiceCall(url + "&country=" + country + "&category=" + newsInterest);
-            else
-                jsonStr = sh.makeServiceCall(url + "&country=" + country);
+
+            jsonStr = sh.makeServiceCall(url);
+//            if (newsInterest != "")
+//                jsonStr = sh.makeServiceCall(url + "&country=" + country + "&category=" + newsInterest);
+//            else {
+//                jsonStr = sh.makeServiceCall(url + "&country=" + country);
+//            }
 
 //            Log.e("URL", url + country);
             Log.e(TAG, "Response from url: " + jsonStr);

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:background="#fff"
+    android:gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context="aakash.thenoobydev.com.catch360.IntroductionActivity">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:alpha="0.8"
+            android:src="@drawable/newspaper" />
+
+        <LinearLayout
+            android:id="@+id/tagText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="CATCH 360"
+                android:textColor="#000"
+                android:textSize="26dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="center"
+                android:text="News of Interest"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:paddingTop="8dp"
+                android:text="Catch 360 provides you with all the latest news of your 'Interest'"
+                android:textColor="#000"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/newsBtn"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:alpha="0"
+            android:fontFamily="@font/comfortaa"
+            android:text="Catch The News"
+            android:textAllCaps="false"
+            android:textColor="#00B8D4"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:alpha="0"
+        android:fontFamily="@font/comfortaa"
+        android:lineSpacingExtra="4dp"
+        android:text="Designed &amp; Developed by: Aakash Goel\n&#169; 2018 infinite inspirations"
+        android:textAlignment="center"
+        android:textSize="12dp" />
+
+</RelativeLayout>

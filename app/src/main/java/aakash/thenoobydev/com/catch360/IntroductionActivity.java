@@ -1,12 +1,19 @@
 package aakash.thenoobydev.com.catch360;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -15,10 +22,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SplashActivity extends AppCompatActivity {
+public class IntroductionActivity extends AppCompatActivity {
 
     private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
-
+    Animation icon_from_top, tagline_from_bottom, logo_from_bottom;
+    ImageView icon;
+    LinearLayout layout;
+    Button newsBtn;
+    TextView text;
     JSONObject jsonObj;
     JSONArray jsonArray;
     String jsonStr;
@@ -27,53 +38,42 @@ public class SplashActivity extends AppCompatActivity {
     ArrayList<String> descL = new ArrayList<>();
     ArrayList<String> urlImgL = new ArrayList<>();
     ArrayList<String> urlNewsL = new ArrayList<>();
-    private String TAG = SplashActivity.class.getSimpleName();
+    ProgressDialog progressDialog;
+    private String TAG = IntroductionActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_introduction);
 
-        ImageView logolayout = (ImageView) findViewById(R.id.logo);
+        icon_from_top = AnimationUtils.loadAnimation(this, R.anim.icon_from_top);
+        tagline_from_bottom = AnimationUtils.loadAnimation(this, R.anim.tagline_from_bottom);
+        logo_from_bottom = AnimationUtils.loadAnimation(this, R.anim.btn_from_bottom);
 
-        logolayout.animate().alpha(1.0f).scaleX(0.9f).scaleY(0.9f).setDuration(2500);
-//        new Handler().postDelayed(new Runnable() {
-//            public void run() {
-////                startActivity(new Intent(getApplicationContext(), AskCountryActivity.class));
-////                finish();
-//                new GetNews().execute();
-//            }
-//        }, 3000);
+        icon = (ImageView) findViewById(R.id.icon);
+        layout = (LinearLayout) findViewById(R.id.tagText);
+        newsBtn = (Button) findViewById(R.id.newsBtn);
+        text = (TextView) findViewById(R.id.copy);
 
-        Boolean isFirstRun = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
-                .getBoolean("isfirstrun", true);
+        icon.setAnimation(icon_from_top);
+        layout.setAnimation(tagline_from_bottom);
+        newsBtn.setAnimation(logo_from_bottom);
 
-        if (isFirstRun) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+//                newsBtn.setVisibility(View.VISIBLE);
+                newsBtn.animate().alpha(1f).setDuration(1000);
+                text.animate().alpha(1f);
+            }
+        }, 2000);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent i = new Intent(getApplicationContext(), IntroductionActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-            }, 3000);
-
-            getSharedPreferences("PREFERENCES", MODE_PRIVATE).edit()
-                    .putBoolean("isfirstrun", false).commit();
-        } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-//                    Intent i = new Intent(getApplicationContext(), AuthActivity.class);
-//                    startActivity(i);
-//                    finish();
-//                    finishActivity(0);
-                    new GetNews().execute();
-                }
-            }, 3000);
-        }
-
+        newsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new GetNews().execute();
+            }
+        });
     }
 
     public void sendBundle() {
@@ -95,10 +95,10 @@ public class SplashActivity extends AppCompatActivity {
 
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog = new ProgressDialog(AskCountryActivity.this);
-//            progressDialog.setMessage("Please wait...");
-//            progressDialog.setCancelable(false);
-//            progressDialog.show();
+            progressDialog = new ProgressDialog(IntroductionActivity.this);
+            progressDialog.setMessage(" Catching News for you!! ");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         protected Void doInBackground(Void... arg0) {
@@ -162,9 +162,9 @@ public class SplashActivity extends AppCompatActivity {
 
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-//            if (progressDialog.isShowing()) {
-//                progressDialog.dismiss();
-//            }
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
             sendBundle();
         }
     }

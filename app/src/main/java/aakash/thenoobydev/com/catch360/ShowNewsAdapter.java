@@ -2,7 +2,10 @@ package aakash.thenoobydev.com.catch360;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +25,15 @@ import java.util.ArrayList;
 public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_holder> {
     Context context;
     ArrayList<String> titleL, descL, urlImgL, urlNewsL;
+    Bitmap bitmap;
 
-    public ShowNewsAdapter(Context applicationContext, ArrayList<String> titleL, ArrayList<String> descL, ArrayList<String> urlImgL, ArrayList<String> urlNewsL) {
+    public ShowNewsAdapter(Context applicationContext, ArrayList<String> titleL, ArrayList<String> descL, ArrayList<String> urlImgL, ArrayList<String> urlNewsL, Bitmap bitmap) {
         this.context = applicationContext;
         this.titleL = titleL;
         this.descL = descL;
         this.urlImgL = urlImgL;
         this.urlNewsL = urlNewsL;
+        this.bitmap = bitmap;
     }
 
     @Override
@@ -50,10 +55,11 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
         holder.newsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(urlNewsL.get(position)));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(urlNewsL.get(position)));
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                context.startActivity(intent);
+                redirectUsingCustomTab(urlNewsL.get(position));
             }
         });
         holder.shareBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +67,7 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, title + "\n\n" + desc);
+                intent.putExtra(Intent.EXTRA_TEXT, "*" + title + "*\n\n" + desc);
                 intent.setType("text/plain");
                 intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -72,6 +78,26 @@ public class ShowNewsAdapter extends RecyclerView.Adapter<ShowNewsAdapter.view_h
     @Override
     public int getItemCount() {
         return titleL.size();
+    }
+
+    private void redirectUsingCustomTab(String url) {
+        Uri uri = Uri.parse(url);
+
+        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+
+        intentBuilder.enableUrlBarHiding();
+        intentBuilder.setCloseButtonIcon(bitmap);
+        // set desired toolbar colors
+        intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+
+        // add start and exit animations if you want(optional)
+        intentBuilder.setStartAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        intentBuilder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        CustomTabsIntent customTabsIntent = intentBuilder.build();
+        customTabsIntent.intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(context, uri);
     }
 
     public class view_holder extends RecyclerView.ViewHolder {

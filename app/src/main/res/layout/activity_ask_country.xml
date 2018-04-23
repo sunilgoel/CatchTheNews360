@@ -22,33 +22,51 @@
             android:alpha="0.7"
             android:src="@drawable/newspaper" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="72dp"
-            android:layout_marginRight="72dp"
-            android:hint="Enter Country Code">
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginLeft="72dp"-->
+        <!--android:layout_marginRight="72dp"-->
+        <!--android:hint="Enter Country Code">-->
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginHorizontal="1dp"
-                android:fontFamily="@font/comfortaa"
-                android:inputType="text"
-                android:maxLength="2"
-                android:textColor="#000"
-                android:textColorHint="#000000"
-                android:textSize="16dp" />
+        <!--<android.support.design.widget.TextInputEditText-->
+        <!--android:id="@+id/country"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--android:layout_marginHorizontal="1dp"-->
+        <!--android:fontFamily="@font/comfortaa"-->
+        <!--android:inputType="text"-->
+        <!--android:text=""-->
+        <!--android:maxLength="2"-->
+        <!--android:textColor="#000"-->
+        <!--android:textColorHint="#000000"-->
+        <!--android:textSize="16dp" />-->
 
-        </android.support.design.widget.TextInputLayout>
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<Button-->
+        <!--style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#8"-->
+        <!--android:fontFamily="@font/comfortaa"-->
+        <!--android:text="India"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="#000"-->
+        <!--android:textStyle="bold" />-->
+
+        <!--</RelativeLayout>-->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="72dp"
+            android:layout_marginHorizontal="56dp"
             android:fontFamily="@font/comfortaa"
             android:padding="8dp"
             android:text="News of Interest"
@@ -61,59 +79,95 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginHorizontal="72dp"
             android:padding="8dp">
 
-            <RadioButton
-                android:id="@+id/business"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Business" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="36dp">
 
-            <RadioButton
-                android:id="@+id/entertainment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Entertainment" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/general"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="General" />
+                    <RadioButton
+                        android:id="@+id/business"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Business" />
 
-            <RadioButton
-                android:id="@+id/health"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Health" />
+                    <RadioButton
+                        android:id="@+id/entertainment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Entertainment" />
+                </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/science"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Science" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/sports"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Sports" />
+                    <RadioButton
+                        android:id="@+id/general"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="General" />
 
-            <RadioButton
-                android:id="@+id/tech"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Technology" />
+                    <RadioButton
+                        android:id="@+id/health"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Health" />
+
+                    <RadioButton
+                        android:id="@+id/sports"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Sports" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/science"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Science" />
+
+                    <RadioButton
+                        android:id="@+id/tech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Technology" />
+                </LinearLayout>
 
 
+            </LinearLayout>
         </RadioGroup>
 
         <Button
@@ -123,7 +177,6 @@
             android:layout_gravity="center"
             android:layout_marginBottom="4dp"
             android:layout_marginHorizontal="78dp"
-            android:layout_marginTop="2dp"
             android:background="#4DB6AC"
             android:fontFamily="@font/comfortaa"
             android:text="Catch the News"

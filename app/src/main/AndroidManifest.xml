@@ -26,11 +26,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ShowNewsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".IntroductionActivity"></activity>
     </application>
 
 </manifest>
