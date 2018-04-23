@@ -19,6 +19,14 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:src="@drawable/newspaper"
+        android:visibility="gone" />
+
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/container"
@@ -32,6 +40,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleApp"></android.support.v7.widget.RecyclerView>
+
+        <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:minHeight="50dp"-->
+        <!--android:minWidth="50dp"-->
+        <!--android:alpha="1"/>-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/searchingData"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/progressBar"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:text="Catch your News of Interest"-->
+        <!--android:alpha="0" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/noInternetConnection"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:text="No Internet Connection"-->
+        <!--android:visibility="gone" />-->
     </android.support.v4.widget.SwipeRefreshLayout>
     <!--<com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"-->
     <!--android:id="@+id/adView"-->
