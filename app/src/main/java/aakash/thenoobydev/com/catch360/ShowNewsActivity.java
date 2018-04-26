@@ -1,6 +1,5 @@
 package aakash.thenoobydev.com.catch360;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,9 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +24,7 @@ import java.util.ArrayList;
 
 public class ShowNewsActivity extends AppCompatActivity {
 
+    static int v[] = {R.drawable.clock, R.drawable.clock_one, R.drawable.clock_rev};
     private static String url = "https://newsapi.org/v2/top-headlines?apiKey=bcf281151bac484dbd2cd56df9f57d3c&language=en";
     RecyclerView recyclerView;
     Bundle bundle;
@@ -37,11 +37,13 @@ public class ShowNewsActivity extends AppCompatActivity {
     ArrayList<String> urlImgL = new ArrayList<>();
     ArrayList<String> urlNewsL = new ArrayList<>();
     Bitmap bitmap;
+    //loader
+    RelativeLayout linearLayout;
+    Handler handler = new Handler();
     ImageView loader;
-    Context context;
+    TextView loadingtext;
     private RecyclerView.Adapter adapter;
     private String TAG = ShowNewsActivity.class.getSimpleName();
-
 
 //    private AdView adView;
 //    private InterstitialAd mInterstitialAd;
@@ -50,10 +52,11 @@ public class ShowNewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_news);
-        loader = (ImageView) findViewById(R.id.loader);
+
+        loader = findViewById(R.id.loader);
+        loadingtext = findViewById(R.id.loadingtext);
+
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_back_black_24dp);
-        String imageUrl = "http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-10.gif";
-        Picasso.get().load(R.drawable.loader).into(loader);
 
 //        MobileAds.initialize(this, "ca-app-pub-6248104477860221~8495708671");
         // banner ad
@@ -112,7 +115,19 @@ public class ShowNewsActivity extends AppCompatActivity {
 //            progressDialog.setMessage("Please wait...");
 //            progressDialog.setCancelable(false);
 //            progressDialog.show();
-            loader.setVisibility(View.VISIBLE);
+            Runnable runnable = new Runnable() {
+                int i = 0;
+
+                public void run() {
+                    loader.setImageResource(v[i]);
+                    i++;
+                    if (i > v.length - 1) {
+                        i = 0;
+                    }
+                    handler.postDelayed(this, 500);
+                }
+            };
+            handler.postDelayed(runnable, 0);
         }
 
         protected Void doInBackground(Void... arg0) {
@@ -180,6 +195,7 @@ public class ShowNewsActivity extends AppCompatActivity {
 //                progressDialog.dismiss();
 //            }
             loader.setVisibility(View.GONE);
+            loadingtext.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             sendBundle();
         }
